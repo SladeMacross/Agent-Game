@@ -64,10 +64,8 @@ High-tech near future:
 
 ## Mechanics ideas (from brainstorming)
 
-### Shared modules = upgrade system
-Every device is built from the same modules: **AI, communicator, scanner, beam, shield or disruptor, self-destruct, stealth**.
-- Option A: upgrade a module once and it improves on every device that has it
-- Option B: a separate tree per device, so the player chooses where to invest
+### Upgrades: a separate tree per device (decided 10/08/2026)
+Every device is built from the same kinds of modules (**AI, communicator, scanner, beam, shield or disruptor, self-destruct, stealth**), but each device (badge, weapon, drone, vehicle) has **its own upgrade tree**, so the player chooses where to invest. Missions award skill points.
 
 ### Gear → gameplay
 | Gear | Gameplay role |
@@ -122,20 +120,49 @@ Decided 10/08/2026. The editor is at `C:\Program Files (x86)\Godot\Godot_v4.7.2-
 
 Pixel-art setup: a 480×270 game screen, scaled up by whole numbers (3× = 1440×810 window) with sharp, unblurred pixels.
 
-### Prototype 1: side-view test room
-A single room with box placeholder art, used to test how stealth feels:
-- The Agent moves and jumps
-- A guard patrols with a visible vision cone; walls and floors block its sight
-- Being seen = restart. Reaching the green exit = mission complete
-- **Hold Q to scan:** time slows to 30% and guards show their armor tier. This tests the "real-time with a scan mode" option from open decision 2.
+### Foundation (built 10/08/2026)
+Everything is placeholder boxes until there's real pixel art. Play starts in the hub.
 
-Controls: A/D or arrows to move, Space/W to jump, hold Q to scan, R to restart.
+**Playable now**
+- **Hub street (top-down):** walk the street, avoid the patrolling guard, enter the tower's blue door. Tab opens the upgrade menu.
+- **Tower Test mission (side view):** climb past the guard to the green roof exit. Finishing it the first time gives 1 skill point and returns you to the hub.
+- **Being spotted** (a guard's suspicion meter fills) restarts the level.
+
+**Stealth rules**
+- **Sight:** guards have a vision cone; walls and floors block it. Seeing the Agent fills a suspicion meter (faster up close), so a quick glimpse isn't instant failure.
+- **Sound:** running footsteps and hard landings make noise. Guards who hear it get suspicious and come to check. **Hold Shift to sneak:** slower, silent.
+- **Scan (Q):** a pulse that marks guards (with their armor tier) and points of interest for a few seconds, then recharges. Walls block it unless you have the Wall Sight upgrade.
+
+**Upgrade trees (starting placeholders, easy to change)**
+| Device | Upgrades |
+|---|---|
+| Badge | Wide Scan I and II, Quick Recharge, Deep Scan, Wall Sight |
+| Weapon | Focused Beam, Charge Shot, Disruptor *(no combat yet)* |
+| Drone | Scout Drone, Quiet Rotors, Fast Rotors *(no drone yet)* |
+| Vehicle | Reinforced Hull, Stealth Plating *(no vehicle yet)* |
+
+The trees are data files in `data/upgrades/`. Open one in Godot to edit names, costs, requirements and effects in the Inspector.
+
+**Project layout**
+| Folder | What's in it |
+|---|---|
+| `autoload/` | Always-loaded systems: `Events` (messages between systems), `GameState` (skill points, upgrades, save file), `SceneRouter` (scene changes with a fade) |
+| `components/` | Reusable parts: vision, hearing, suspicion, scanner, scannable tag, health, solid block, exit/door |
+| `actors/` | The Agent and guards, each with a side-view and a top-down version sharing the same logic |
+| `data/upgrades/` | One upgrade tree per device |
+| `levels/` | `hub/` (top-down) and `missions/` (side view); every level uses `level.gd` |
+| `ui/` | HUD and upgrade menu |
+| `tests/` | Automated checks (26 of them) for upgrades, saving, sight, hearing, scanning and the hub |
+
+**Controls:** WASD or arrows to move, Space to jump (side view), hold Shift to sneak, Q to scan, Tab for upgrades (hub), R to restart.
+
+**Not built yet:** combat (the beam, armor tiers mattering), the drone, the vehicle, real art and sound.
 
 ---
 
 ## Open decisions
 1. ~~**Perspective**~~: 2D pixel art, mixed (see above). Still to decide: which view handles the main missions?
-2. **Real-time or turn-based** planning?
+2. ~~**Real-time or turn-based**~~: **pure real-time** (decided 10/08/2026). No slow-motion; scanning happens at full speed.
 3. **Structure:** mission select, or a connected world?
 4. **Story:** who the Agent works for, and why. Undecided.
 5. **Title:** undecided.

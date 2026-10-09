@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://actors/enemies/guard_side.gd" id="1_guard"]
+[ext_resource type="Script" path="res://components/vision_sensor.gd" id="2_vision"]
+[ext_resource type="Script" path="res://components/hearing_sensor.gd" id="3_hearing"]
+[ext_resource type="Script" path="res://components/awareness.gd" id="4_awareness"]
+[ext_resource type="Script" path="res://components/health.gd" id="5_health"]
+[ext_resource type="Script" path="res://components/scannable.gd" id="6_scannable"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(12, 24)
+
+[node name="Guard" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_guard")
+body_size = Vector2(12, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="VisionSensor" type="Node2D" parent="."]
+position = Vector2(0, -8)
+script = ExtResource("2_vision")
+view_range = 120.0
+view_angle_deg = 50.0
+
+[node name="HearingSensor" type="Node2D" parent="."]
+script = ExtResource("3_hearing")
+
+[node name="Awareness" type="Node" parent="."]
+script = ExtResource("4_awareness")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("5_health")
+
+[node name="Scannable" type="Node2D" parent="."]
+script = ExtResource("6_scannable")
+bracket_size = Vector2(18, 30)

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="UpgradeTree" format=3]
+
+[ext_resource type="Script" path="res://data/upgrade_node.gd" id="1_k7mxa"]
+[ext_resource type="Script" path="res://data/upgrade_tree.gd" id="2_7xr7c"]
+
+[sub_resource type="Resource" id="Resource_6snkn"]
+script = ExtResource("1_k7mxa")
+id = "focused_beam"
+display_name = "Focused Beam"
+description = "Beam deals +1 damage."
+effects = {
+"beam_damage": 1.0
+}
+
+[sub_resource type="Resource" id="Resource_3u6uc"]
+script = ExtResource("1_k7mxa")
+id = "charge_shot"
+display_name = "Charge Shot"
+description = "Hold to charge a strong blast. Loud."
+cost = 2
+effects = {
+"charge_shot": 1.0
+}
+
+[sub_resource type="Resource" id="Resource_0yy6c"]
+script = ExtResource("1_k7mxa")
+id = "disruptor"
+display_name = "Disruptor"
+description = "A pulse that disables tech and armor."
+cost = 2
+requires = Array[String](["charge_shot"])
+effects = {
+"disruptor": 1.0
+}
+
+[resource]
+script = ExtResource("2_7xr7c")
+device_id = "weapon"
+display_name = "Weapon"
+base_stats = {
+"beam_damage": 1.0,
+"charge_shot": 0.0,
+"disruptor": 0.0
+}
+nodes = Array[ExtResource("1_k7mxa")]([SubResource("Resource_6snkn"), SubResource("Resource_3u6uc"), SubResource("Resource_0yy6c")])

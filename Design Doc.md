@@ -110,6 +110,29 @@ Precedents for mixing perspectives: *Zelda II*, *Blaster Master*, *Contra*'s tun
 
 ---
 
+### Game types (from `Video Game Ideas\game types.txt`)
+Of the 2D types on that list, the Agent Game uses:
+- **Horizontal platformer** for the side-view infiltration missions
+- **Top-down action RPG / top-down shooter** for the hubs and streets
+
+---
+
+## Engine: Godot 4.7
+Decided 10/08/2026. The editor is at `C:\Users\slade\Godot\Godot_v4.7.2-stable_win64.exe`.
+
+Pixel-art setup: a 480×270 game screen, scaled up by whole numbers (3× = 1440×810 window) with sharp, unblurred pixels.
+
+### Prototype 1: side-view test room
+A single room with box placeholder art, used to test how stealth feels:
+- The Agent moves and jumps
+- A guard patrols with a visible vision cone; walls and floors block its sight
+- Being seen = restart. Reaching the green exit = mission complete
+- **Hold Q to scan:** time slows to 30% and guards show their armor tier. This tests the "real-time with a scan mode" option from open decision 2.
+
+Controls: A/D or arrows to move, Space/W to jump, hold Q to scan, R to restart.
+
+---
+
 ## Open decisions
 1. ~~**Perspective**~~: 2D pixel art, mixed (see above). Still to decide: which view handles the main missions?
 2. **Real-time or turn-based** planning?

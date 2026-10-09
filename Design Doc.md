@@ -118,7 +118,7 @@ Of the 2D types on that list, the Agent Game uses:
 ---
 
 ## Engine: Godot 4.7
-Decided 10/08/2026. The editor is at `C:\Users\slade\Godot\Godot_v4.7.2-stable_win64.exe`.
+Decided 10/08/2026. The editor is at `C:\Program Files (x86)\Godot\Godot_v4.7.2-stable_win64.exe`.
 
 Pixel-art setup: a 480×270 game screen, scaled up by whole numbers (3× = 1440×810 window) with sharp, unblurred pixels.
 
